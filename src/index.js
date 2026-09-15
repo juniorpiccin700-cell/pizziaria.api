@@ -13,7 +13,7 @@ import { fileURLToPath } from "url";
 
 // import authRouters from './routers/authRouters.js';
 
-// import clienteRouters from './routers/clienteRouters.js';
+ import clienteRouters from './routers/clienteRouters.js';
 
 // import produtoRouters from './routers/produtoRouters.js';
 
@@ -56,7 +56,7 @@ app.get('/',(req ,res) => {
 // Rotas da api
 const apiPrefix = '/api';
 
-// app.use(`${apiPrefix}/clientes`, clienteRouters);
+ app.use(`${apiPrefix}/clientes`, clienteRouters);
 
 // app.use(`${apiPrefix}/login`, authRouters);
 
@@ -68,7 +68,7 @@ app.use((err,req,res,next) => {console.error(err.stack);
     res.status(500).send('Algo deu errado no Servidor!');
 });
 
-const PORTA = process.env.PORT;
+const PORTA = process.env.PORT || 3000;
 app.listen(PORTA, () => {
     console.log(`Servidor rodando na porta ${PORTA}`);
 });
