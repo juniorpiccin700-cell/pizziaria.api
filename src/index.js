@@ -17,7 +17,7 @@ import { fileURLToPath } from "url";
 
 // import produtoRouters from './routers/produtoRouters.js';
 
-// import pedidoRouters from  './routers/pedidoRouters.js';
+import pedidoRouters from './routers/pedidoRouters.js';
 // import { METHODS } from "http";
 
 //configurações
@@ -62,7 +62,7 @@ const apiPrefix = '/api';
 
 // app.use(`${apiPrefix}/produtos`, produtoRouters);
 
-// app.use(`${apiPrefix}/pedidos`, pedidoRouters);
+app.use(`${apiPrefix}/pedidos`, pedidoRouters);
 
 app.use((err,req,res,next) => {console.error(err.stack);
     res.status(500).send('Algo deu errado no Servidor!');

@@ -1,5 +1,5 @@
 import mysql from 'mysql2/promise';
-
+ 
 const db = mysql.createPool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
@@ -7,15 +7,30 @@ const db = mysql.createPool({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME
 });
-
-(async () => {
-    try {
+ 
+const originalQuery = db.query.bind(db);
+ 
+db.query = async (sql, values) => {
+ 
+    const queryLog = mysql.format(sql, values);
+ 
+    console.log(`
+        --------------------------
+        Query:
+        ${queryLog}
+        --------------------------
+        `);
+ 
+    return originalQuery(sql, values);
+};
+(async () =>{
+    try{
         const connection = await db.getConnection();
-        console.log('Conexão com o banco de dados estabelecida com sucesso!');
+        console.log("Conexão feita com sucesso!");
         connection.release();
-    } catch (err) {
-        console.error('Erro ao conectar ao banco de dados', err);
+    } catch(err){
+        console.error('Erro ao conectar com o banco')
     }
 })();
-
+ 
 export default db;
