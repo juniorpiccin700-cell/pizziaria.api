@@ -15,10 +15,14 @@ import { fileURLToPath } from "url";
 
  import clienteRouters from './routers/clienteRouters.js';
 
-// import produtoRouters from './routers/produtoRouters.js';
+ import produtoRouters from './routers/produtoRouters.js';
 
 import pedidoRouters from './routers/pedidoRouters.js';
+
+import entregadorRouters from './routers/entregadorRouters.js' ;
+
 // import { METHODS } from "http";
+
 
 //configurações
 
@@ -60,9 +64,11 @@ const apiPrefix = '/api';
 
 // app.use(`${apiPrefix}/login`, authRouters);
 
-// app.use(`${apiPrefix}/produtos`, produtoRouters);
+ app.use(`${apiPrefix}/produtos`, produtoRouters);
 
 app.use(`${apiPrefix}/pedidos`, pedidoRouters);
+
+app.use(`${apiPrefix}/entregador`, entregadorRouters);
 
 app.use((err,req,res,next) => {console.error(err.stack);
     res.status(500).send('Algo deu errado no Servidor!');
