@@ -5,7 +5,8 @@ import * as clienteServices from '../services/clienteServices.js';
 export const login = async (req, res) => {
 const { cpf, senha } = req.body;
 try {
-    const cliente = await clienteServices.findAll(cpf);
+    const clientes = await clienteServices.findAll(cpf);
+    const cliente = clientes[0];
     if (!cliente )
         return res.status(401).json({ mensagem: 'Credenciais inválidas.' });
     const senhaValida = await bcrypt.compare(senha, cliente[0].senha);
